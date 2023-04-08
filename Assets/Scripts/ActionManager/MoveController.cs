@@ -8,6 +8,7 @@ public class MoveController : MonoBehaviour
     [Header("Input")]
     [SerializeField] InputController inputController = null;
     [SerializeField] float moveInput = 0;
+    [SerializeField] bool runInput = false;
     // Player Component
     Rigidbody2D rb;
     
@@ -16,7 +17,9 @@ public class MoveController : MonoBehaviour
     [SerializeField, Range(0f, 100f)] float maxGroundAcceleration = 30;
     [SerializeField] float acceleration = 0;
     [Header("Velocity Propertise")]
-    [SerializeField, Range(0f, 30f)] float maxVelocity = 10;
+    [SerializeField, Range(0f, 30f)] float maxRunningVelocity = 15;
+    [SerializeField, Range(0f, 30f)] float maxWalkingVelocity = 10;
+    [SerializeField] float maxVelocity = 0;
     [SerializeField, Range(0f, 30f)] float fricVelocity = 4;
     [SerializeField] Vector2 desiredVelocity;
     [Header("Move Propertise")]
@@ -33,6 +36,8 @@ public class MoveController : MonoBehaviour
     void Update()
     {
         moveInput = inputController.RetrieveAxisInput();
+        runInput = inputController.RetrieveRunInput();
+        maxVelocity = runInput ? maxRunningVelocity : maxWalkingVelocity;
         desiredVelocity = new Vector2(moveInput, 0f) * Mathf.Max(maxVelocity - fricVelocity, 0f);
     }
 
@@ -50,7 +55,7 @@ public class MoveController : MonoBehaviour
         velocity.x  = Mathf.MoveTowards(velocity.x, desiredVelocity.x, acceleration);
         // apply new velocity to player
         rb.velocity = velocity;
-        Debug.Log(rb.velocity.x);
+        // Debug.Log("Player's velocity: " + rb.velocity.x);
     }
 
 

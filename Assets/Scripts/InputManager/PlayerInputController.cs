@@ -13,6 +13,6 @@ public class PlayerInputController : InputController
 
     public override bool RetrieveRunInput()
     {
-        return Input.GetKeyDown(KeyCode.LeftShift);
+        return Input.GetKey(KeyCode.LeftShift);
     }
 }
