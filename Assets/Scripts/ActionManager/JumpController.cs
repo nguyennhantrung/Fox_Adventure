@@ -26,8 +26,13 @@ public class JumpController : MonoBehaviour
     [SerializeField] bool jumpTrigger = false;
     [SerializeField, Range(0f, 5f)] int jumpMaxTime = 3;
     [SerializeField] int jumpTime = 0;
+    [SerializeField] bool isJumping = false;
     [SerializeField] Vector2 velocity;
 
+    [Header("Coyote Jump Propertise")]
+    [SerializeField, Range(0f, 0.5f)] float coyoteTimeMax = 0.3f; 
+    [SerializeField] float coyoteTimeCounter = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -38,16 +43,10 @@ public class JumpController : MonoBehaviour
     void Update()
     {
         jumpInput |= inputController.RetrieveJumpInput();
-        if(jumpInput)
-        {
-            if(jumpTime != jumpMaxTime)
-            {
-                jumpTrigger = true;
-            }   
-            jumpInput = false;
-        }
+        
     }
     private void FixedUpdate() {
+        CheckJumpCondition();
         Jump();
         UpdateGravityBody();
     }
@@ -67,20 +66,22 @@ public class JumpController : MonoBehaviour
             // set value
             jumpTrigger = false;
             jumpTime++;
+            isJumping = true;
         }
         if(ground.GetGround() == true && rb.velocity.y == 0)
         {
             jumpTime = 0;
+            isJumping = false;
         }
     }
 
     void UpdateGravityBody()
     {
-        if(rb.velocity.y > 0)
+        if(rb.velocity.y > 0 && inputController.RetrieveJumpHoldInput())
         {
             rb.gravityScale = jumpUpGravityScale;
         }
-        else if(rb.velocity.y < 0)
+        else if(rb.velocity.y < 0 || !inputController.RetrieveJumpHoldInput())
         {
             rb.gravityScale = jumpDownGravityScale;
         }
@@ -88,5 +89,30 @@ public class JumpController : MonoBehaviour
         {
             rb.gravityScale = 1;
         }
+    }
+
+    void CheckJumpCondition()
+    {
+        if(ground.GetGround() == true && rb.velocity.y == 0)
+        {
+            coyoteTimeCounter = coyoteTimeMax;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.fixedDeltaTime;
+        }
+        if(jumpInput)
+        {
+            if(isJumping && jumpTime != jumpMaxTime || (!isJumping && coyoteTimeCounter > 0f))
+            {
+                jumpTrigger = true;
+            }   
+            jumpInput = false;
+        }
+    }
+
+    public bool IsJump()
+    {
+        return isJumping;
     }
 }

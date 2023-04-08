@@ -9,8 +9,10 @@ public class MoveController : MonoBehaviour
     [SerializeField] InputController inputController = null;
     [SerializeField] float moveInput = 0;
     [SerializeField] bool runInput = false;
+    [SerializeField] bool crounchInput = false;
     // Player Component
     Rigidbody2D rb;
+    [SerializeField] GroundCheck ground;
     
     // Move Propertise
     [Header("Acceleration Propertise")]
@@ -19,11 +21,13 @@ public class MoveController : MonoBehaviour
     [Header("Velocity Propertise")]
     [SerializeField, Range(0f, 30f)] float maxRunningVelocity = 15;
     [SerializeField, Range(0f, 30f)] float maxWalkingVelocity = 10;
+    [SerializeField, Range(0f, 30f)] float maxCrounchingVelocity = 5;
     [SerializeField] float maxVelocity = 0;
     [SerializeField, Range(0f, 30f)] float fricVelocity = 4;
     [SerializeField] Vector2 desiredVelocity;
     [Header("Move Propertise")]
     [SerializeField] Vector2 velocity;
+    [SerializeField] bool isCrounching = false;
     
 
     // Start is called before the first frame update
@@ -37,7 +41,24 @@ public class MoveController : MonoBehaviour
     {
         moveInput = inputController.RetrieveAxisInput();
         runInput = inputController.RetrieveRunInput();
+        crounchInput = inputController.RetrieveCrounchInput();
         maxVelocity = runInput ? maxRunningVelocity : maxWalkingVelocity;
+        bool triggerCrounching = false;
+        if(ground.GetGround())
+        {
+            maxVelocity = crounchInput ? maxCrounchingVelocity : maxVelocity;
+            if(crounchInput)   
+                triggerCrounching = true;
+        }
+        isCrounching = triggerCrounching;
+        // if(isCrounching)
+        // {
+        //     // TODO: crounching body
+        // }
+        // else
+        // {
+        //     // TODO: normal body
+        // }
         desiredVelocity = new Vector2(moveInput, 0f) * Mathf.Max(maxVelocity - fricVelocity, 0f);
     }
 
@@ -57,6 +78,4 @@ public class MoveController : MonoBehaviour
         rb.velocity = velocity;
         // Debug.Log("Player's velocity: " + rb.velocity.x);
     }
-
-
 }

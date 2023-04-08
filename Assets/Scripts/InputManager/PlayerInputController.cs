@@ -11,6 +11,16 @@ public class PlayerInputController : InputController
         return Input.GetAxisRaw("Horizontal");
     }
 
+    public override bool RetrieveCrounchInput()
+    {
+        return Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+    }
+
+    public override bool RetrieveJumpHoldInput()
+    {
+        return Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);throw new System.NotImplementedException();
+    }
+
     public override bool RetrieveJumpInput()
     {
         return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
