@@ -9,4 +9,5 @@ public abstract class InputController : ScriptableObject
     public abstract bool RetrieveJumpInput();
     public abstract bool RetrieveJumpHoldInput();
     public abstract bool RetrieveCrounchInput();
+    public abstract bool RetrieveInteractionInput();
 }

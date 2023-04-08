@@ -16,6 +16,11 @@ public class PlayerInputController : InputController
         return Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
     }
 
+    public override bool RetrieveInteractionInput()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
+
     public override bool RetrieveJumpHoldInput()
     {
         return Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);throw new System.NotImplementedException();
