@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9074759b1bba2fc4d9ded365d905bf3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionCollider: {fileID: 1045152890}
+  interactionCollider: {fileID: 0}
 --- !u!70 &1045152890
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class MoveController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ground = GetComponent<GroundCheck>();
     }
 
     // Update is called once per frame
