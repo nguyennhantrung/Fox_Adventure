@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D bottomPoint;
+    // [SerializeField] CircleCollider2D bottomPoint;
+    [SerializeField] CapsuleCollider2D bottomPoint;
     [SerializeField] ContactFilter2D contactFilter;
     [SerializeField] int numCollider = 0;
     [SerializeField] bool onGround = false;
 
     private void Start() {
-        bottomPoint = GetComponent<CircleCollider2D>();
+        bottomPoint = GetComponent<CapsuleCollider2D>();
     }
     
     private void FixedUpdate() {

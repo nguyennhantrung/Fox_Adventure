@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656967869}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.025642, y: -0.95525765, z: 0}
+  m_LocalPosition: {x: 23.35, y: -0.95525765, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2387,10 +2387,12 @@ GameObject:
   - component: {fileID: 1964199567}
   - component: {fileID: 1964199568}
   - component: {fileID: 1964199569}
+  - component: {fileID: 1964199575}
   - component: {fileID: 1964199573}
   - component: {fileID: 1964199572}
   - component: {fileID: 1964199571}
   - component: {fileID: 1964199570}
+  - component: {fileID: 1964199574}
   m_Layer: 8
   m_Name: player
   m_TagString: Untagged
@@ -2540,10 +2542,10 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964199563}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1}
@@ -2648,6 +2650,38 @@ MonoBehaviour:
     maxNormalAngle: 0
   numCollider: 0
   onGround: 0
+--- !u!114 &1964199574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964199563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61570c6d3aae14a4fbd6c6819a2a58dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 0}
+  inputController: {fileID: 11400000, guid: 017f67a344cbc664f86c85c4024cb404, type: 2}
+  moveController: {fileID: 0}
+  jumpController: {fileID: 0}
+--- !u!70 &1964199575
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964199563}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1}
+  m_Size: {x: 0.55, y: 0.06}
+  m_Direction: 1
 --- !u!1 &2096726335
 GameObject:
   m_ObjectHideFlags: 0
